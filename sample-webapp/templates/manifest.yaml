@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "chart.fullname" . }}-sample-web-app
+  labels:
+    app: sample-web-app
+  {{- include "chart.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.sampleWebApp.replicas }}
+  selector:
+    matchLabels:
+      app: sample-web-app
+    {{- include "chart.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        app: sample-web-app
+      {{- include "chart.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - env:
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        image: {{ .Values.sampleWebApp.web.image.repository }}:{{ .Values.sampleWebApp.web.image.tag
+          | default .Chart.AppVersion }}
+        name: web
+        ports:
+        - containerPort: 5000
+        resources: {{- toYaml .Values.sampleWebApp.web.resources | nindent 10 }}
+      imagePullSecrets:
+      - name: regcred
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "chart.fullname" . }}-sample-web-app
+  labels:
+    app: sample-web-app
+  {{- include "chart.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.sampleWebApp.type }}
+  selector:
+    app: sample-web-app
+    {{- include "chart.selectorLabels" . | nindent 4 }}
+  ports:
+  {{- .Values.sampleWebApp.ports | toYaml | nindent 2 }}

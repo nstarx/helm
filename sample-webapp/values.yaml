@@ -1,0 +1,19 @@
+kubernetesClusterDomain: cluster.local
+sampleWebApp:
+  ports:
+  - port: 89
+    protocol: TCP
+    targetPort: 5000
+  replicas: 1
+  type: ClusterIP
+  web:
+    image:
+      repository: nstarx.azurecr.io/nstarxpatch
+      tag: samplewebapp_v1
+    resources:
+      limits:
+        cpu: 250m
+        memory: 256Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
