@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  my-cm:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2025-03-13T20:17:29.114534+02:00"
+    description: A Helm chart for Kubernetes
+    digest: 791ed2cdac963769bf9373f5efae18fb83286c2c3465d8aea26db721373617be
+    name: my-cm
+    type: application
+    urls:
+    - https://raw.githubusercontent.com/nstarx/helm/my-cm-0.1.0.tgz
+    version: 0.1.0
+generated: "2025-03-13T20:17:29.114302+02:00"
