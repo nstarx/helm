@@ -3,9 +3,9 @@ entries:
   my-cm:
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2025-03-15T20:19:14.325171+02:00"
+    created: "2025-03-15T20:24:24.823201+02:00"
     description: A Helm chart for Kubernetes
-    digest: be1006c5fe27a23a10a4e3e82a164f8ca3ef388fc609fd7d9a881b852a173970
+    digest: e48f9ce7942016d86eea007bcb5ee9bd55b35c95992c4d2c5cc30107ea99fa91
     name: my-cm
     type: application
     urls:
@@ -14,12 +14,12 @@ entries:
   sample-webapp:
   - apiVersion: v2
     appVersion: 0.1.9
-    created: "2025-03-15T20:19:14.325288+02:00"
+    created: "2025-03-15T20:24:24.823333+02:00"
     description: A Helm chart for Kubernetes
-    digest: 19f55a1d4c38b22d22f66ef07fea05a7d5634ba6e085e604ebf24ef5d58e8a5b
+    digest: 4c15091b408c19f04ad037674c44dda38ae7cf365b127cd05d9ff1b9f85c9b72
     name: sample-webapp
     type: application
     urls:
     - https://nstarx.github.io/helm/sample-webapp-0.1.9.tgz
     version: 0.1.9
-generated: "2025-03-15T20:19:14.32502+02:00"
+generated: "2025-03-15T20:24:24.823035+02:00"
