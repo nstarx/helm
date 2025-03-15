@@ -41,7 +41,7 @@ This command will create a .tgz archive in the current directory.
 Update your Helm repository's index file (index.yaml) to reflect the newly packaged chart:
 
 ```bash
-helm repo index --url https://raw.githubusercontent.com/nstarx/helm --merge index.yaml .
+helm repo index . --url https://nstarx.github.io/helm
 ```
 
 ## Step 5: Commit and Push Changes
