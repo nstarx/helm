@@ -3,7 +3,7 @@ entries:
   my-cm:
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2025-03-21T09:56:08.827479+02:00"
+    created: "2025-03-21T14:33:41.550042+02:00"
     description: A Helm chart for Kubernetes
     digest: e48f9ce7942016d86eea007bcb5ee9bd55b35c95992c4d2c5cc30107ea99fa91
     name: my-cm
@@ -11,21 +11,21 @@ entries:
     urls:
     - https://nstarx.github.io/helm/my-cm-0.1.0.tgz
     version: 0.1.0
-  nstarx_kubeflow_core:
+  nstarx-kubeflow-core:
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2025-03-21T09:56:08.827675+02:00"
+    created: "2025-03-21T14:33:41.550155+02:00"
     description: A Helm chart for Kubernetes
-    digest: c8bda0c02e872fda98d0622bf9d451296b95bcc41bcd3c041161d8fd1e411b41
-    name: nstarx_kubeflow_core
+    digest: 62cd3051d91e38452a487823300dd7109af00c77d0b53080800f9b1c3393352c
+    name: nstarx-kubeflow-core
     type: application
     urls:
-    - https://nstarx.github.io/helm/nstarx_kubeflow_core-0.0.1.tgz
+    - https://nstarx.github.io/helm/nstarx-kubeflow-core-0.0.1.tgz
     version: 0.0.1
   sample-webapp:
   - apiVersion: v2
     appVersion: 0.1.9
-    created: "2025-03-21T09:56:08.827864+02:00"
+    created: "2025-03-21T14:33:41.550237+02:00"
     description: A Helm chart for Kubernetes
     digest: 4c15091b408c19f04ad037674c44dda38ae7cf365b127cd05d9ff1b9f85c9b72
     name: sample-webapp
@@ -33,4 +33,4 @@ entries:
     urls:
     - https://nstarx.github.io/helm/sample-webapp-0.1.9.tgz
     version: 0.1.9
-generated: "2025-03-21T09:56:08.826667+02:00"
+generated: "2025-03-21T14:33:41.549911+02:00"
