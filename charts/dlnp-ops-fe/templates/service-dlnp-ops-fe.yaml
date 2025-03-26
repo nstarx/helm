@@ -2,13 +2,9 @@ apiVersion: v1
 kind: Service
 metadata:
   name: dlnp-ops-fe
-  annotations:
-    service.beta.kubernetes.io/azure-dns-label-name: "nstarx-dev-ui"
-    service.beta.kubernetes.io/azure-load-balancer-resource-group: "DLNPDEV"
 spec:
   selector:
     app: dlnp-ops-fe
   ports:
   - port: 80
     targetPort: 80
-  type: LoadBalancer
