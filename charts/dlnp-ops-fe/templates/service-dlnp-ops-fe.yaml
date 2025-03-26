@@ -3,6 +3,7 @@ kind: Service
 metadata:
   name: dlnp-ops-fe
 spec:
+  type: ClusterIP
   selector:
     app: dlnp-ops-fe
   ports:
