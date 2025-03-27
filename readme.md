@@ -62,6 +62,6 @@ Finally, update your local Helm repository to reflect the changes:
 helm repo update
 helm search repo nstarx-helm
 ```
-
+>please wait 50 seconds for the github pages to update
 
 Your Helm chart should now appear in the repository search results. You've successfully packaged and published a Helm chart!
