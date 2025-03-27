@@ -1,0 +1,14 @@
+admin:
+  admin:
+    image:
+      repository: padrian2s/fl-admin
+      tag: latest
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 8080
+  replicas: 1
+  serviceAccount:
+    annotations: {}
+  type: NodePort
+kubernetesClusterDomain: cluster.local
