@@ -1,0 +1,91 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: sparkadmin-service-account
+  namespace: dev
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sparkadmin-deployment
+  labels:
+    app: sparkadmin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sparkadmin
+  template:
+    metadata:
+      labels:
+        app: sparkadmin
+    spec:
+      serviceAccountName: sparkadmin-service-account
+      containers:
+      - name: sparkadmin
+        image: padrian2s/sparkadmin:latest
+        ports:
+        - containerPort: 8080
+---
+# sparkadmin-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: sparkadmin-service
+spec:
+  selector:
+    app: sparkadmin
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: NodePort
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: sparkadmin-ui-virtualservice
+  namespace: dev
+spec:
+  gateways:
+  - kubeflow/kubeflow-gateway
+  hosts:
+  - '*'
+  http:
+  - match:
+    - uri:
+        prefix: /spark-admin/
+    rewrite:
+        uri: /spark-admin/
+    route:
+    - destination:
+        port:
+          number: 80
+        host: sparkadmin-service.dev.svc.cluster.local
+    timeout: 300s
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: pod-listing-role
+rules:
+- apiGroups: [""]
+  resources: ["pods", "services"]
+  verbs: ["list", "get", "watch", "create"]
+- apiGroups: ["kubeflow.org"]
+  resources: ["profiles"]
+  verbs: ["get", "watch", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: pod-listing-role-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: pod-listing-role
+subjects:
+- kind: ServiceAccount
+  name: sparkadmin-service-account
+  namespace: dev
+---

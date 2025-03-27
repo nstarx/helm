@@ -1,0 +1,16 @@
+kubernetesClusterDomain: cluster.local
+sparkadminDeployment:
+  replicas: 1
+  sparkadmin:
+    image:
+      repository: padrian2s/sparkadmin
+      tag: latest
+sparkadminService:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 8080
+  type: NodePort
+sparkadminServiceAccount:
+  serviceAccount:
+    annotations: {}
