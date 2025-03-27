@@ -1,6 +1,1 @@
-image:
-  repository: nstarx.azurecr.io/dlnp-ops-fe
-  tag: 1.0.2
-  pullPolicy: IfNotPresent
-
-# Additional configuration can be added here
+# Default values for dlnp-ops-fe
