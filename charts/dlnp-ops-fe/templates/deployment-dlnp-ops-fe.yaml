@@ -4,6 +4,7 @@ metadata:
   name: dlnp-ops-fe
   labels:
     app: dlnp-ops-fe
+    version: 1.0.0
 spec:
   replicas: 1
   selector:
@@ -13,10 +14,11 @@ spec:
     metadata:
       labels:
         app: dlnp-ops-fe
+        version: 1.0.0
     spec:
       containers:
       - name: dlnp-ops-fe
-        image: nstarx.azurecr.io/dlnp-ops-fe:latest
+        image: nstarx.azurecr.io/dlnp-ops-fe:1.0.0
         ports:
         - containerPort: 80
       imagePullSecrets:
