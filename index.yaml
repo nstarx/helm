@@ -3,9 +3,9 @@ entries:
   dlnp-ops-fe:
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2025-03-27T10:23:09.789677311Z"
+    created: "2025-03-27T10:35:15.491037467Z"
     description: A Helm chart for dlnp-ops-fe
-    digest: 88a24b1a424562d0c10a3c32130c665c1d0c6a511cf6a226151f6668ef2c26fd
+    digest: 5d8d5b4027200530a03645037ea894667726a0cf7f4b085a89791cefb208bc30
     name: dlnp-ops-fe
     type: application
     urls:
@@ -14,7 +14,7 @@ entries:
   my-cm:
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2025-03-27T10:23:09.789830711Z"
+    created: "2025-03-27T10:35:15.491428611Z"
     description: A Helm chart for Kubernetes
     digest: e48f9ce7942016d86eea007bcb5ee9bd55b35c95992c4d2c5cc30107ea99fa91
     name: my-cm
@@ -25,7 +25,7 @@ entries:
   nstarx-kubeflow-core:
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2025-03-27T10:23:09.789987177Z"
+    created: "2025-03-27T10:35:15.4916156Z"
     description: A Helm chart for Kubernetes
     digest: 98502efd64a39ac4cb43fccc0a6101a6cc8bc73cac34e0cc386aaf4444f407b6
     name: nstarx-kubeflow-core
@@ -36,7 +36,7 @@ entries:
   sample-webapp:
   - apiVersion: v2
     appVersion: 0.1.9
-    created: "2025-03-27T10:23:09.790171186Z"
+    created: "2025-03-27T10:35:15.491812091Z"
     description: A Helm chart for Kubernetes
     digest: 4c15091b408c19f04ad037674c44dda38ae7cf365b127cd05d9ff1b9f85c9b72
     name: sample-webapp
@@ -44,4 +44,4 @@ entries:
     urls:
     - https://nstarx.github.io/helm/sample-webapp-0.1.9.tgz
     version: 0.1.9
-generated: "2025-03-27T10:23:09.789413467Z"
+generated: "2025-03-27T10:35:15.489728575Z"

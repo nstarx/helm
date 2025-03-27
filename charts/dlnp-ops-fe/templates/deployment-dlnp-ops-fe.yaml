@@ -18,8 +18,8 @@ spec:
     spec:
       containers:
       - name: dlnp-ops-fe
-        image: nstarx.azurecr.io/dlnp-ops-fe:1.0.0
         image: nstarx.azurecr.io/dlnp-ops-fe:latest
+        image: nstarx.azurecr.io/dlnp-ops-fe:1.0.0
         ports:
         - containerPort: 80
       imagePullSecrets:
