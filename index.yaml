@@ -3,9 +3,9 @@ entries:
   dlnp-ops-fe:
   - apiVersion: v2
     appVersion: 1.0.2
-    created: "2025-03-28T09:33:43.916439653Z"
+    created: "2025-03-28T09:47:17.145026613Z"
     description: A Helm chart for dlnp-ops-fe
-    digest: 4e9c348585191c9d68a2b80c99b6a93975448e63bd662713c18b82b649a44c20
+    digest: 0abb25dfe0d8e101e5f650b90e971155b12a3c3efd0c7a172f07d878b9ffd8c4
     name: dlnp-ops-fe
     type: application
     urls:
@@ -14,7 +14,7 @@ entries:
   fl-admin:
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2025-03-28T09:33:43.916691532Z"
+    created: "2025-03-28T09:47:17.145541436Z"
     description: A Helm chart for Kubernetes
     digest: 7d4c3ce2c5fb4c351442bc10675c48f95b8b58cb747c7c66d065baa861fd7635
     name: fl-admin
@@ -25,7 +25,7 @@ entries:
   my-cm:
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2025-03-28T09:33:43.916841384Z"
+    created: "2025-03-28T09:47:17.145688144Z"
     description: A Helm chart for Kubernetes
     digest: e48f9ce7942016d86eea007bcb5ee9bd55b35c95992c4d2c5cc30107ea99fa91
     name: my-cm
@@ -36,7 +36,7 @@ entries:
   nstarx-kubeflow-core:
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2025-03-28T09:33:43.916999548Z"
+    created: "2025-03-28T09:47:17.146051929Z"
     description: A Helm chart for Kubernetes
     digest: 98502efd64a39ac4cb43fccc0a6101a6cc8bc73cac34e0cc386aaf4444f407b6
     name: nstarx-kubeflow-core
@@ -47,7 +47,7 @@ entries:
   sample-webapp:
   - apiVersion: v2
     appVersion: 0.1.9
-    created: "2025-03-28T09:33:43.917188238Z"
+    created: "2025-03-28T09:47:17.146474242Z"
     description: A Helm chart for Kubernetes
     digest: 4c15091b408c19f04ad037674c44dda38ae7cf365b127cd05d9ff1b9f85c9b72
     name: sample-webapp
@@ -58,7 +58,7 @@ entries:
   spark-admin:
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2025-03-28T09:33:43.917368552Z"
+    created: "2025-03-28T09:47:17.146793261Z"
     description: A Helm chart for Kubernetes
     digest: 32f1a9422f4163b88f0692be82d98f1a9a43808ad763e80e7bd641871478390b
     name: spark-admin
@@ -66,4 +66,4 @@ entries:
     urls:
     - https://nstarx.github.io/helm/spark-admin-0.1.0.tgz
     version: 0.1.0
-generated: "2025-03-28T09:33:43.916114974Z"
+generated: "2025-03-28T09:47:17.144761169Z"
