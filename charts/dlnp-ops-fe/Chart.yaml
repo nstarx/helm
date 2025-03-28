@@ -2,5 +2,5 @@ apiVersion: v2
 name: dlnp-ops-fe
 description: A Helm chart for dlnp-ops-fe
 type: application
-version: 0.1.0  # Chart structure version
-appVersion: "1.0.2"  # Application version
+version: 0.1.0
+appVersion: "1.0.0"
