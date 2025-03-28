@@ -12,3 +12,11 @@ admin:
     annotations: {}
   type: NodePort
 kubernetesClusterDomain: cluster.local
+
+spark:
+  serviceAccount:
+    name: spark
+  clusterRole:
+    name: spark-role
+  clusterRoleBinding:
+    name: spark-pod-creator-binding
