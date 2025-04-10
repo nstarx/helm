@@ -1,0 +1,97 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ops-be-deployment
+  labels:
+    app: ops-be
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ops-be
+  template:
+    metadata:
+      labels:
+        app: ops-be
+    spec:
+      containers:
+        - name: ops-be
+          image: nstarx.azurecr.io/ops-be:1
+          ports:
+            - containerPort: 8000
+          env:
+            - name: ENVIRONMENT
+              value: "production" # Example environment variable
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+            requests:
+              memory: "56Mi"
+              cpu: "250m"
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ops-be-service
+  labels:
+    app: ops-be
+spec:
+  selector:
+    app: ops-be
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
+  type: ClusterIP
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: ops-be
+spec:
+  gateways:
+  - kubeflow/kubeflow-gateway
+  hosts:
+  - '*'
+  http:
+  - match:
+    - uri:
+        prefix: /ops-be/
+    rewrite:
+        uri: /ops-be/
+    route:
+    - destination:
+        port:
+          number: 80
+        host: ops-be-service
+    timeout: 300s
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: ops-be-cluster-role
+  labels:
+    app: ops-be
+rules:
+  - apiGroups: [ "" ]
+    resources: [ "*" ]
+    verbs: [ "*" ]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: ops-be-cluster-role-binding
+  labels:
+    app: ops-be
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: ops-be-cluster-role
+subjects:
+  - kind: ServiceAccount
+    name: default
+    namespace: default
+---
+

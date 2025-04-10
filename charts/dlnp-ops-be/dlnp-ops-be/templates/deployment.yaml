@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "dlnp-ops-be.fullname" . }}-deployment
+  labels:
+    app: ops-be
+  {{- include "dlnp-ops-be.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: ops-be
+    {{- include "dlnp-ops-be.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        app: ops-be
+      {{- include "dlnp-ops-be.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - env:
+        - name: ENVIRONMENT
+          value: {{ quote .Values.deployment.opsBe.env.environment }}
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        image: {{ .Values.deployment.opsBe.image.repository }}:{{ .Values.deployment.opsBe.image.tag
+          | default .Chart.AppVersion }}
+        name: ops-be
+        ports:
+        - containerPort: 8000
+        resources: {{- toYaml .Values.deployment.opsBe.resources | nindent 10 }}
+      restartPolicy: Always

@@ -1,0 +1,23 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: {{ include "dlnp-ops-be.fullname" . }}-ops-be
+  labels:
+  {{- include "dlnp-ops-be.labels" . | nindent 4 }}
+spec:
+  gateways:
+  - kubeflow/kubeflow-gateway
+  hosts:
+  - '*'
+  http:
+  - match:
+    - uri:
+        prefix: /ops-be/
+    rewrite:
+      uri: /ops-be/
+    route:
+    - destination:
+        host: ops-be-service
+        port:
+          number: 80
+    timeout: 300s

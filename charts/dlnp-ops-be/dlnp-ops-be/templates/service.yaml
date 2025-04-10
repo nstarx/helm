@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "dlnp-ops-be.fullname" . }}-service
+  labels:
+    app: ops-be
+  {{- include "dlnp-ops-be.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  selector:
+    app: ops-be
+    {{- include "dlnp-ops-be.selectorLabels" . | nindent 4 }}
+  ports:
+  {{- .Values.service.ports | toYaml | nindent 2 }}

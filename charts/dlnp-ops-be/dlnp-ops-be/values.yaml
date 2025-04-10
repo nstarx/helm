@@ -1,0 +1,22 @@
+deployment:
+  opsBe:
+    env:
+      environment: production
+    image:
+      repository: nstarx.azurecr.io/ops-be
+      tag: "1"
+    resources:
+      limits:
+        cpu: 500m
+        memory: 512Mi
+      requests:
+        cpu: 250m
+        memory: 56Mi
+  replicas: 1
+kubernetesClusterDomain: cluster.local
+service:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 8000
+  type: ClusterIP
