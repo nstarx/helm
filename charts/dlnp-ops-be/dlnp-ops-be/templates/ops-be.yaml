@@ -17,7 +17,7 @@ spec:
       uri: /ops-be/
     route:
     - destination:
-        host: ops-be-service
+        host: {{ include "dlnp-ops-be.fullname" . }}-service
         port:
           number: 80
     timeout: 300s
