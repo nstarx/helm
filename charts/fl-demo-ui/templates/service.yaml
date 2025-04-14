@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "chart.fullname" . }}
+  labels:
+  {{- include "chart.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.flDemoUi.type }}
+  selector:
+    app: fl-demo-ui
+    {{- include "chart.selectorLabels" . | nindent 4 }}
+  ports:
+  {{- .Values.flDemoUi.ports | toYaml | nindent 2 }}

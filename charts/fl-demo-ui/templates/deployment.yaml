@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "chart.fullname" . }}
+  labels:
+  {{- include "chart.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.flDemoUi.replicas }}
+  selector:
+    matchLabels:
+      app: fl-demo-ui
+    {{- include "chart.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        app: fl-demo-ui
+      {{- include "chart.selectorLabels" . | nindent 8 }}
+    spec:
+      imagePullSecrets:
+      - name: acr-secret
+      containers:
+      - env:
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        image: {{ .Values.flDemoUi.flDemoUi.image.repository }}:{{ .Values.flDemoUi.flDemoUi.image.tag
+          | default .Chart.AppVersion }}
+        name: fl-demo-ui
+        ports:
+        - containerPort: 80
+        resources: {{- toYaml .Values.flDemoUi.flDemoUi.resources | nindent 10 }}
