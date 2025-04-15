@@ -1,0 +1,69 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: terraform-aks-deploy
+spec:
+  params:
+    - name: resource_group_name
+      type: string
+    - name: cluster_name
+      type: string
+    - name: dns_prefix
+      type: string
+    - name: resource_group_location
+      type: string
+    - name: resource_group_name_prefix
+      type: string
+    - name: node_count
+      type: string
+    - name: msi_id
+      type: string
+    - name: username
+      type: string
+    - name: tags
+      type: string
+      description: "JSON string of tags to apply to resources"
+      default: '{}'
+    - name: node_pools
+      type: string
+      description: "JSON string of node pools configuration"
+      default: '{}'
+  steps:
+    - name: create-aks
+      image: nstarx.azurecr.io/azure-demo/terraform-aks:latest
+      env:
+        - name: ARM_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              name: azurecred
+              key: client-id
+        - name: ARM_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: azurecred
+              key: client-secret
+        - name: ARM_SUBSCRIPTION_ID
+          valueFrom:
+            secretKeyRef:
+              name: azurecred
+              key: subscription-id
+        - name: ARM_TENANT_ID
+          valueFrom:
+            secretKeyRef:
+              name: azurecred
+              key: tenant-id
+      script: |
+        cd /terraform
+        terraform init
+        terraform apply -auto-approve \
+          -var="resource_group_name=$(params.resource_group_name)" \
+          -var="cluster_name=$(params.cluster_name)" \
+          -var="dns_prefix=$(params.dns_prefix)" \
+          -var="resource_group_location=$(params.resource_group_location)" \
+          -var="resource_group_name_prefix=$(params.resource_group_name_prefix)" \
+          -var="node_count=$(params.node_count)" \
+          -var="msi_id=$(params.msi_id)" \
+          -var="username=$(params.username)" \
+          -var='tags=$(params.tags)' \
+          -var='node_pools=$(params.node_pools)'
+        

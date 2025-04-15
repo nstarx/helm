@@ -1,0 +1,5 @@
+defaultConfig:
+  appEnv: production
+  logLevel: info
+  timeoutSeconds: "30"
+kubernetesClusterDomain: cluster.local

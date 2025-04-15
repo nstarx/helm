@@ -1,0 +1,29 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: test-aks-deploy
+spec:
+  serviceAccountName: aks-deploy-sa
+  pipelineRef:
+    name: aks-deploy-pipeline
+  params:
+    - name: resource_group_name
+      value: "test-rg"
+    - name: cluster_name
+      value: "test-aks"
+    - name: dns_prefix
+      value: "test-aks"
+    - name: resource_group_location
+      value: "eastus"
+    - name: resource_group_name_prefix
+      value: "rg"
+    - name: node_count
+      value: "1"
+    - name: msi_id
+      value: "test-msi" 
+    - name: username
+      value: "testadmin"
+    - name: tags
+      value: '{"project":"DLNP","environment":"test","purpose":"test"}'
+    - name: node_pools
+      value: '{"workerpool":{"vm_size":"Standard_D2s_v3","node_count":2,"os_disk_size_gb":150}}'

@@ -1,0 +1,55 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: aks-deploy-pipeline
+spec:
+  params:
+    - name: resource_group_name
+      type: string
+    - name: cluster_name
+      type: string
+    - name: dns_prefix
+      type: string
+    - name: resource_group_location
+      type: string
+    - name: resource_group_name_prefix
+      type: string
+    - name: node_count
+      type: string
+    - name: msi_id
+      type: string
+    - name: username
+      type: string
+    - name: tags
+      type: string
+      description: "JSON string of tags to apply to resources"
+      default: '{}'
+    - name: node_pools
+      type: string
+      description: "JSON string of node pools configuration"
+      default: '{}'
+  tasks:
+    - name: deploy-aks
+      taskRef:
+        name: terraform-aks-deploy
+      params:
+        - name: resource_group_name
+          value: $(params.resource_group_name)
+        - name: cluster_name
+          value: $(params.cluster_name)
+        - name: dns_prefix
+          value: $(params.dns_prefix)
+        - name: resource_group_location
+          value: $(params.resource_group_location)
+        - name: resource_group_name_prefix
+          value: $(params.resource_group_name_prefix)
+        - name: node_count
+          value: $(params.node_count)
+        - name: msi_id
+          value: $(params.msi_id)
+        - name: username
+          value: $(params.username)
+        - name: tags
+          value: $(params.tags)
+        - name: node_pools
+          value: $(params.node_pools)
