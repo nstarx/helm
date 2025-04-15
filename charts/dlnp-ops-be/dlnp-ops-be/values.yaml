@@ -4,7 +4,7 @@ deployment:
       environment: production
     image:
       repository: nstarx.azurecr.io/ops-be
-      tag: "3"
+      tag: "5"
     resources:
       limits:
         cpu: 500m
