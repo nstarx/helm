@@ -1,3 +1,5 @@
+{{- if .Values.operator.watch.clusterWide }}
+# Cluster-wide permissions
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -39,3 +41,33 @@ rules:
   - apiGroups: [""]
     resources: [namespaces]
     verbs: [get, list, watch]
+{{- else }}
+# Namespace-scoped permissions
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: {{ include "dlnp-operator.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "dlnp-operator.labels" . | nindent 4 }}
+rules:
+  # Framework: knowing which other operators are running (i.e. peering)
+  - apiGroups: [kopf.dev]
+    resources: [kopfpeerings]
+    verbs: [list, watch, patch, get]
+  
+  # Framework: posting the events about the handlers progress/errors
+  - apiGroups: [""]
+    resources: [events]
+    verbs: [create]
+    
+  # For reading/creating secrets to store kubeconfigs
+  - apiGroups: [""]
+    resources: [secrets]
+    verbs: [get, list, watch, create, update, patch, delete]
+    
+  # For reading/creating temporary pods if needed
+  - apiGroups: [""]
+    resources: [pods]
+    verbs: [get, list, watch, create, update, patch, delete]
+{{- end }}

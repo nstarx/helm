@@ -8,6 +8,12 @@ image:
   tag: latest
   pullPolicy: Always
 
+# Global Values
+global:
+  # NOTE: This is for reference only. To actually deploy to a different namespace,
+  # use: helm install dlnp-operator ./dlnp-operator --namespace your-namespace
+  deploymentNamespace: ""
+
 nameOverride: ""
 fullnameOverride: ""
 
@@ -53,11 +59,85 @@ affinity: {}
 
 # Configuration settings for the operator
 operator:
-  # Namespace to watch for Kubeconfig resources (empty means all namespaces)
-  watchNamespace: "default"
+  # Watch settings
+  watch:
+    # Set to specific namespace name to watch only that namespace
+    # Set to empty string "" to watch all namespaces (cluster-wide)
+    # Set to "deployed" to watch only the namespace where operator is deployed
+    namespace: "default"
+    # Whether to create cluster-wide permissions or namespace-scoped permissions
+    clusterWide: false
   # Log level (debug, info, warning, error)
   logLevel: "info"
   # Notification settings
   notifications:
     enabled: true
-    endpoint: "http://notification-service:8080/send-message"
+    endpoint: "http://10.0.0.2:30021/send-message"
+  # Helm deployment settings
+  helm:
+    chartName: "nstarx-kubeflow-core"
+    kfNameSpace: "default"
+    repoUrl: "https://nstarx.github.io/helm"
+    releaseName: "nstarx-kubeflow-core"
+    atomic: true
+    wait: true
+    createNamespace: true
+    cleanupOnFail: true
+    skipCrds: false
+  # Kubernetes settings
+  kubernetes:
+    kubeconfigDir: "/tmp/kubeconfigs"
+    connectionTimeout: 5
+    retryDelay: 60
+  # Environment variables for the operator container
+  env:
+    # Standard environment variables
+    - name: KOPF_STANDALONE
+      value: "true"
+    - name: WATCH_NAMESPACE
+      value: {{ .Values.operator.watchNamespace | quote }}
+    - name: LOG_LEVEL
+      value: {{ .Values.operator.logLevel | quote }}
+    - name: NOTIFICATION_ENABLED
+      value: {{ .Values.operator.notifications.enabled | quote }}
+    - name: NOTIFICATION_ENDPOINT
+      value: {{ .Values.operator.notifications.endpoint | quote }}
+    - name: CHART_NAME
+      value: {{ .Values.operator.helm.chartName | quote }}
+    - name: KF_POD_NAMESPACE
+      value: {{ .Values.operator.helm.kfNameSpace | quote }}
+    - name: REPO_URL
+      value: {{ .Values.operator.helm.repoUrl | quote }}
+    - name: RELEASE_NAME
+      value: {{ .Values.operator.helm.releaseName | quote }}
+    - name: KUBECONFIG_DIR
+      value: {{ .Values.operator.kubernetes.kubeconfigDir | quote }}
+    - name: CONNECTION_TIMEOUT
+      value: {{ .Values.operator.kubernetes.connectionTimeout | quote }}
+    - name: RETRY_DELAY
+      value: {{ .Values.operator.kubernetes.retryDelay | quote }}
+    - name: HELM_ATOMIC
+      value: {{ .Values.operator.helm.atomic | quote }}
+    - name: HELM_WAIT
+      value: {{ .Values.operator.helm.wait | quote }}
+    - name: HELM_CREATE_NAMESPACE
+      value: {{ .Values.operator.helm.createNamespace | quote }}
+    - name: HELM_CLEANUP_ON_FAIL
+      value: {{ .Values.operator.helm.cleanupOnFail | quote }}
+    - name: HELM_SKIP_CRDS
+      value: {{ .Values.operator.helm.skipCrds | quote }}
+    # Add your custom environment variables here
+    # - name: MY_CUSTOM_VAR
+    #   value: "my-value"
+    
+  # Environment variables from secrets
+  envFrom:
+    # Reference secrets
+    # - secretRef:
+    #     name: operator-secrets
+    
+  # Environment variables from configmaps
+  configMapEnv:
+    # Reference configmaps
+    # - configMapRef:
+    #     name: operator-config

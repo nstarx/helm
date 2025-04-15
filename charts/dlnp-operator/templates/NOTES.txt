@@ -1,8 +1,14 @@
 Thank you for installing {{ .Chart.Name }}.
 
-The DLNP Operator has been deployed to your cluster.
+The DLNP Operator has been deployed to your cluster in namespace {{ .Release.Namespace }}.
 
-The operator is now watching for Kubeconfig custom resources in the {{ .Values.operator.watchNamespace }} namespace.
+{{- if eq .Values.operator.watch.namespace "deployed" }}
+The operator is now watching for Kubeconfig custom resources in this same namespace ({{ .Release.Namespace }}).
+{{- else if eq .Values.operator.watch.namespace "" }}
+The operator is now watching for Kubeconfig custom resources across ALL namespaces in the cluster.
+{{- else }}
+The operator is now watching for Kubeconfig custom resources in the {{ .Values.operator.watch.namespace }} namespace.
+{{- end }}
 
 To create a Kubeconfig resource and deploy Kubeflow to a target cluster:
 
@@ -12,6 +18,9 @@ apiVersion: nstarx.com/v1alpha1
 kind: Kubeconfig
 metadata:
   name: TARGET-CLUSTER-NAME
+{{- if ne .Values.operator.watch.namespace "" }}
+  namespace: {{ if eq .Values.operator.watch.namespace "deployed" }}{{ .Release.Namespace }}{{ else }}{{ .Values.operator.watch.namespace }}{{ end }}
+{{- end }}
 spec:
   cloud: aws  # or azure, gcp, etc.
   kubeconfig: |
@@ -23,7 +32,7 @@ spec:
 
 3. Check the status of your resource:
 
-   kubectl get kubeconfig TARGET-CLUSTER-NAME -o yaml
+   kubectl get kubeconfig TARGET-CLUSTER-NAME{{- if ne .Values.operator.watch.namespace "" }} -n {{ if eq .Values.operator.watch.namespace "deployed" }}{{ .Release.Namespace }}{{ else }}{{ .Values.operator.watch.namespace }}{{ end }}{{ end }} -o yaml
 
 The operator will automatically:
 - Process the kubeconfig
