@@ -1,0 +1,63 @@
+# Default values for dlnp-operator
+# This is a YAML-formatted file.
+
+replicaCount: 1
+
+image:
+  repository: karrad/dlnp-operator
+  tag: latest
+  pullPolicy: Always
+
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+  # Annotations to add to the service account
+  annotations: {}
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 80
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+# Configuration settings for the operator
+operator:
+  # Namespace to watch for Kubeconfig resources (empty means all namespaces)
+  watchNamespace: "default"
+  # Log level (debug, info, warning, error)
+  logLevel: "info"
+  # Notification settings
+  notifications:
+    enabled: true
+    endpoint: "http://notification-service:8080/send-message"

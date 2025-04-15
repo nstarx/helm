@@ -1,0 +1,35 @@
+Thank you for installing {{ .Chart.Name }}.
+
+The DLNP Operator has been deployed to your cluster.
+
+The operator is now watching for Kubeconfig custom resources in the {{ .Values.operator.watchNamespace }} namespace.
+
+To create a Kubeconfig resource and deploy Kubeflow to a target cluster:
+
+1. Create a file named kubeconfig-sample.yaml with the following content:
+
+apiVersion: nstarx.com/v1alpha1
+kind: Kubeconfig
+metadata:
+  name: TARGET-CLUSTER-NAME
+spec:
+  cloud: aws  # or azure, gcp, etc.
+  kubeconfig: |
+    # Paste your kubeconfig content here
+
+2. Apply it to your cluster:
+
+   kubectl apply -f kubeconfig-sample.yaml
+
+3. Check the status of your resource:
+
+   kubectl get kubeconfig TARGET-CLUSTER-NAME -o yaml
+
+The operator will automatically:
+- Process the kubeconfig
+- Validate connectivity to the target cluster
+- Deploy Kubeflow to the target cluster
+- Update the status of the Kubeconfig resource
+
+For more information or to report issues, please visit:
+https://github.com/karrad/dlnp-operator
