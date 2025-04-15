@@ -28,26 +28,34 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
+            # Pod and operator information
             - name: POD_NAME
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.name
             - name: OPERATOR_NAME
               value: {{ include "dlnp-operator.fullname" . }}
+            - name: OPERATOR_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            # Handle special case for "deployed" namespace
+            {{- if eq .Values.operator.watch.namespace "deployed" }}
             - name: WATCH_NAMESPACE
-              value: {{ if eq .Values.operator.watch.namespace "deployed" }}{{ .Release.Namespace }}{{ else }}{{ .Values.operator.watch.namespace }}{{ end }}
-            {{- range .Values.operator.env }}
-            - name: {{ .name }}
-              value: {{ .value }}
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
             {{- end }}
-          {{- with .Values.operator.envFrom }}
           envFrom:
+            # Load environment variables from ConfigMap
+            - configMapRef:
+                name: {{ include "dlnp-operator.fullname" . }}-config
+            {{- with .Values.operator.envFrom }}
             {{- toYaml . | nindent 12 }}
-          {{- end }}
-          {{- with .Values.operator.configMapEnv }}
-          envFrom:
+            {{- end }}
+            {{- with .Values.operator.configMapEnv }}
             {{- toYaml . | nindent 12 }}
-          {{- end }}
+            {{- end }}
           volumeMounts:
             - name: tmp-volume
               mountPath: /tmp

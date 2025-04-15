@@ -89,55 +89,17 @@ operator:
     kubeconfigDir: "/tmp/kubeconfigs"
     connectionTimeout: 5
     retryDelay: 60
-  # Environment variables for the operator container
-  env:
-    # Standard environment variables
-    - name: KOPF_STANDALONE
-      value: "true"
-    - name: WATCH_NAMESPACE
-      value: {{ .Values.operator.watchNamespace | quote }}
-    - name: LOG_LEVEL
-      value: {{ .Values.operator.logLevel | quote }}
-    - name: NOTIFICATION_ENABLED
-      value: {{ .Values.operator.notifications.enabled | quote }}
-    - name: NOTIFICATION_ENDPOINT
-      value: {{ .Values.operator.notifications.endpoint | quote }}
-    - name: CHART_NAME
-      value: {{ .Values.operator.helm.chartName | quote }}
-    - name: KF_POD_NAMESPACE
-      value: {{ .Values.operator.helm.kfNameSpace | quote }}
-    - name: REPO_URL
-      value: {{ .Values.operator.helm.repoUrl | quote }}
-    - name: RELEASE_NAME
-      value: {{ .Values.operator.helm.releaseName | quote }}
-    - name: KUBECONFIG_DIR
-      value: {{ .Values.operator.kubernetes.kubeconfigDir | quote }}
-    - name: CONNECTION_TIMEOUT
-      value: {{ .Values.operator.kubernetes.connectionTimeout | quote }}
-    - name: RETRY_DELAY
-      value: {{ .Values.operator.kubernetes.retryDelay | quote }}
-    - name: HELM_ATOMIC
-      value: {{ .Values.operator.helm.atomic | quote }}
-    - name: HELM_WAIT
-      value: {{ .Values.operator.helm.wait | quote }}
-    - name: HELM_CREATE_NAMESPACE
-      value: {{ .Values.operator.helm.createNamespace | quote }}
-    - name: HELM_CLEANUP_ON_FAIL
-      value: {{ .Values.operator.helm.cleanupOnFail | quote }}
-    - name: HELM_SKIP_CRDS
-      value: {{ .Values.operator.helm.skipCrds | quote }}
-    # Add your custom environment variables here
+  # Additional custom environment variables for the operator container
+  extraEnv: []
     # - name: MY_CUSTOM_VAR
     #   value: "my-value"
     
   # Environment variables from secrets
-  envFrom:
-    # Reference secrets
+  envFrom: []
     # - secretRef:
     #     name: operator-secrets
     
   # Environment variables from configmaps
-  configMapEnv:
-    # Reference configmaps
+  configMapEnv: []
     # - configMapRef:
     #     name: operator-config

@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "dlnp-operator.fullname" . }}-config
+  labels:
+    {{- include "dlnp-operator.labels" . | nindent 4 }}
+data:
+  # Standard configuration
+  KOPF_STANDALONE: "true"
+  
+  # Watch namespace - special handling for "deployed" value
+  {{- if eq .Values.operator.watch.namespace "deployed" }}
+  # This will be overridden in the deployment via fieldRef
+  WATCH_NAMESPACE: ""
+  {{- else }}
+  WATCH_NAMESPACE: {{ .Values.operator.watch.namespace | quote }}
+  {{- end }}
+  
+  # Logging settings
+  LOG_LEVEL: {{ .Values.operator.logLevel | quote }}
+  
+  # Notification settings
+  NOTIFICATION_ENABLED: {{ .Values.operator.notifications.enabled | toString | quote }}
+  NOTIFICATION_ENDPOINT: {{ .Values.operator.notifications.endpoint | quote }}
+  
+  # Helm settings
+  CHART_NAME: {{ .Values.operator.helm.chartName | quote }}
+  KF_POD_NAMESPACE: {{ .Values.operator.helm.kfNameSpace | quote }}
+  REPO_URL: {{ .Values.operator.helm.repoUrl | quote }}
+  RELEASE_NAME: {{ .Values.operator.helm.releaseName | quote }}
+  HELM_ATOMIC: {{ .Values.operator.helm.atomic | toString | quote }}
+  HELM_WAIT: {{ .Values.operator.helm.wait | toString | quote }}
+  HELM_CREATE_NAMESPACE: {{ .Values.operator.helm.createNamespace | toString | quote }}
+  HELM_CLEANUP_ON_FAIL: {{ .Values.operator.helm.cleanupOnFail | toString | quote }}
+  HELM_SKIP_CRDS: {{ .Values.operator.helm.skipCrds | toString | quote }}
+  
+  # Kubernetes settings
+  KUBECONFIG_DIR: {{ .Values.operator.kubernetes.kubeconfigDir | quote }}
+  CONNECTION_TIMEOUT: {{ .Values.operator.kubernetes.connectionTimeout | toString | quote }}
+  RETRY_DELAY: {{ .Values.operator.kubernetes.retryDelay | toString | quote }}
+  
+  # Custom environment variables
+  {{- range .Values.operator.extraEnv }}
+  {{ .name }}: {{ .value | quote }}
+  {{- end }}
