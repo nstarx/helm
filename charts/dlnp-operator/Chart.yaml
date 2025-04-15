@@ -4,7 +4,7 @@ description: A Helm chart for deploying the nstarx Kubeconfig Operator
 type: application
 version: 0.2.0
 appVersion: "1.1.0"
-icon: https://raw.githubusercontent.com/karrad/dlnp-operator/main/icons/dlnp-operator-icon.svg
+icon: https://raw.githubusercontent.com/nstarx/helm/refs/heads/main/charts/dlnp-operator/dlnp-operator-icon.svg
 maintainers:
   - name: Murthy Karra
     email: dakshinamurthy.karra@nstarxinc.com
