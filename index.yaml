@@ -3,89 +3,100 @@ entries:
   adventureworks:
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2025-04-10T16:10:44.859572+03:00"
+    created: "2025-04-14T19:37:12.740407235+05:30"
     description: A Helm chart for Kubernetes
     digest: 1bf97a9674298b0617c4ac9bc45c770e777637edd7344f0f18a32782e77aab51
     name: adventureworks
     type: application
     urls:
-    - https://nstarx.github.io/helm/adventureworks-0.1.0.tgz
+    - adventureworks-0.1.0.tgz
     version: 0.1.0
   dlnp-ops-be:
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2025-04-10T16:10:44.859719+03:00"
+    created: "2025-04-14T19:37:12.740738579+05:30"
     description: A Helm chart for DLNP AI Zone Backend
-    digest: 5153b4a27bcf34db847277f42feccab8a225962a29199f7e62286a1371c21c72
+    digest: b617f60e9943957233ae267cf07cd82925039e678537dfa22c25bd0ce0b86d35
     name: dlnp-ops-be
     type: application
     urls:
-    - https://nstarx.github.io/helm/dlnp-ops-be-0.1.0.tgz
+    - dlnp-ops-be-0.1.0.tgz
     version: 0.1.0
   dlnp-ops-fe:
   - apiVersion: v2
     appVersion: 1.0.3
-    created: "2025-04-10T16:10:44.859803+03:00"
+    created: "2025-04-14T19:37:12.740919801+05:30"
     description: A Helm chart for dlnp-ops-fe
     digest: eb3df81492cc9ae522cfbb9bf781d9e2677f995596d8cea28321208fafdf7469
     name: dlnp-ops-fe
     type: application
     urls:
-    - https://nstarx.github.io/helm/dlnp-ops-fe-0.1.0.tgz
+    - dlnp-ops-fe-0.1.0.tgz
     version: 0.1.0
   fl-admin:
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2025-04-10T16:10:44.859926+03:00"
+    created: "2025-04-14T19:37:12.741185337+05:30"
     description: A Helm chart for Kubernetes
     digest: 1997dc6b5374b543472ab26321a1236cde2b879a4343632679ec540de0f978fd
     name: fl-admin
     type: application
     urls:
-    - https://nstarx.github.io/helm/fl-admin-0.1.0.tgz
+    - fl-admin-0.1.0.tgz
+    version: 0.1.0
+  fl-demo-ui:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2025-04-14T19:37:12.741491132+05:30"
+    description: A Helm chart for Kubernetes
+    digest: f5132c8d826a77b914ad824af0c480d7cab501943ed30b75ab24ebf1ea2cdcd3
+    name: fl-demo-ui
+    type: application
+    urls:
+    - fl-demo-ui-0.1.0.tgz
     version: 0.1.0
   my-cm:
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2025-04-10T16:10:44.860014+03:00"
+    created: "2025-04-14T19:37:12.741783333+05:30"
     description: A Helm chart for Kubernetes
     digest: e48f9ce7942016d86eea007bcb5ee9bd55b35c95992c4d2c5cc30107ea99fa91
     name: my-cm
     type: application
     urls:
-    - https://nstarx.github.io/helm/my-cm-0.1.0.tgz
+    - my-cm-0.1.0.tgz
     version: 0.1.0
   nstarx-kubeflow-core:
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2025-04-10T16:10:44.860117+03:00"
+    created: "2025-04-14T19:37:12.742028699+05:30"
     description: A Helm chart for Kubernetes
     digest: 98502efd64a39ac4cb43fccc0a6101a6cc8bc73cac34e0cc386aaf4444f407b6
     name: nstarx-kubeflow-core
     type: application
     urls:
-    - https://nstarx.github.io/helm/nstarx-kubeflow-core-0.0.1.tgz
+    - nstarx-kubeflow-core-0.0.1.tgz
     version: 0.0.1
   sample-webapp:
   - apiVersion: v2
     appVersion: 0.1.9
-    created: "2025-04-10T16:10:44.860237+03:00"
+    created: "2025-04-14T19:37:12.742306405+05:30"
     description: A Helm chart for Kubernetes
     digest: 4c15091b408c19f04ad037674c44dda38ae7cf365b127cd05d9ff1b9f85c9b72
     name: sample-webapp
     type: application
     urls:
-    - https://nstarx.github.io/helm/sample-webapp-0.1.9.tgz
+    - sample-webapp-0.1.9.tgz
     version: 0.1.9
   spark-admin:
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2025-04-10T16:10:44.860349+03:00"
+    created: "2025-04-14T19:37:12.742587595+05:30"
     description: A Helm chart for Kubernetes
     digest: 32f1a9422f4163b88f0692be82d98f1a9a43808ad763e80e7bd641871478390b
     name: spark-admin
     type: application
     urls:
-    - https://nstarx.github.io/helm/spark-admin-0.1.0.tgz
+    - spark-admin-0.1.0.tgz
     version: 0.1.0
-generated: "2025-04-10T16:10:44.859383+03:00"
+generated: "2025-04-14T19:37:12.739978632+05:30"
