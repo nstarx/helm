@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dlnp-ops-fe
+  labels:
+    app: dlnp-ops-fe
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dlnp-ops-fe
+  template:
+    metadata:
+      labels:
+        app: dlnp-ops-fe
+    spec:
+      containers:
+      - name: dlnp-ops-fe
+        image: nstarx.azurecr.io/dlnp-ops-fe:latest
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+      - name: regcred
+
