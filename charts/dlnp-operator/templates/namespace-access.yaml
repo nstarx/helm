@@ -1,0 +1,30 @@
+{{- if not .Values.operator.watch.clusterWide }}
+# This role provides namespace access needed by kopf framework
+# even in namespace-scoped mode
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ include "dlnp-operator.fullname" . }}-namespace-access
+  labels:
+    {{- include "dlnp-operator.labels" . | nindent 4 }}
+rules:
+  # For listing namespaces (needed by kopf framework)
+  - apiGroups: [""]
+    resources: [namespaces]
+    verbs: [get, list, watch]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ include "dlnp-operator.fullname" . }}-namespace-access
+  labels:
+    {{- include "dlnp-operator.labels" . | nindent 4 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: {{ include "dlnp-operator.fullname" . }}-namespace-access
+subjects:
+  - kind: ServiceAccount
+    name: {{ include "dlnp-operator.serviceAccountName" . }}
+    namespace: {{ .Release.Namespace }}
+{{- end }}

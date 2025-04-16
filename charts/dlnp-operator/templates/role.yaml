@@ -70,4 +70,9 @@ rules:
   - apiGroups: [""]
     resources: [pods]
     verbs: [get, list, watch, create, update, patch, delete]
+
+  # Application: watching & handling for kubeconfig resources and updating their statuses
+  - apiGroups: [nstarx.com]
+    resources: [kubeconfigs, kubeconfigs/status]
+    verbs: [get, list, watch, patch, update]
 {{- end }}
