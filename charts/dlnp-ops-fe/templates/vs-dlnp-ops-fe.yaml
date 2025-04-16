@@ -2,7 +2,7 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: dlnp-ops-fe2
+  name: dlnp-ops-fe
 spec:
   gateways:
   - kubeflow/kubeflow-gateway
