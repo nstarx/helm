@@ -24,7 +24,7 @@ This enables automated deployment of Kubeflow to multiple clusters by simply cre
 
 ```bash
 # Add the repo
-helm repo add dlnp https://karrad.github.io/helm
+helm repo add dlnp https://nstarx.github.io/helm
 
 # Update repositories
 helm repo update
@@ -37,11 +37,11 @@ Or install from local chart:
 
 ```bash
 # Clone the repository
-git clone https://github.com/karrad/dlnp-operator.git
-cd dlnp-operator
+git clone https://github.com/nstarx/helm.git
+cd helm
 
 # Install the chart
-helm install dlnp-operator ./chart
+helm install dlnp-operator ./charts/dlnp-operator
 ```
 
 ## Values
@@ -49,8 +49,8 @@ helm install dlnp-operator ./chart
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | replicaCount | int | 1 | Number of operator replicas |
-| image.repository | string | `"karrad/dlnp-operator"` | Image repository |
-| image.tag | string | `"latest"` | Image tag |
+| image.repository | string | `"nstarx.azurecr.io/dlnp-operator"` | Image repository |
+| image.tag | string | `"v1"` | Image tag |
 | image.pullPolicy | string | `"Always"` | Image pull policy |
 | operator.watch.namespace | string | `"default"` | Namespace to watch for Kubeconfig resources ("" for all namespaces, "deployed" for same namespace as operator) |
 | operator.watch.clusterWide | bool | `false` | Whether to use cluster-wide permissions |
