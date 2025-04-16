@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}
+  name: dlnp-ops-fe
   labels:
-    app: {{ .Release.Name }}
-    version: {{ .Values.image.tag }}
+    app: dlnp-ops-fe
+    version: 1.0.4
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ .Release.Name }}
+      app: dlnp-ops-fe
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}
-        version: {{ .Values.image.tag }}
+        app: dlnp-ops-fe
+        version: 1.0.4
     spec:
       containers:
-      - name: {{ .Release.Name }}
-        image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+      - name: dlnp-ops-fe
+        image: nstarx.azurecr.io/dlnp-ops-fe:1.0.4
         ports:
         - containerPort: 80
       imagePullSecrets:
