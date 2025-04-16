@@ -3,14 +3,4 @@ image:
   tag: 1.0.4
   pullPolicy: IfNotPresent
 
-# Additional configuration
-nameOverride: ""
-fullnameOverride: ""
-
-replicaCount: 1
-
-resources: {}
-
-service:
-  type: ClusterIP
-  port: 80
+# Additional configuration can be added here
