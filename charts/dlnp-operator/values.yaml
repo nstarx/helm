@@ -4,8 +4,8 @@
 replicaCount: 1
 
 image:
-  repository: karrad/dlnp-operator
-  tag: latest
+  repository: nstarx.azurecr.io/dlnp-operator
+  tag: v1
   pullPolicy: Always
 
 # Global Values
