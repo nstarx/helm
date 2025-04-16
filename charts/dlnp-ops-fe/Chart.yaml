@@ -3,4 +3,4 @@ name: dlnp-ops-fe
 description: A Helm chart for dlnp-ops-fe
 type: application
 version: 0.1.0  # Chart structure version
-appVersion: "1.0.3"  # Application version
+appVersion: "1.0.4"  # Application version
