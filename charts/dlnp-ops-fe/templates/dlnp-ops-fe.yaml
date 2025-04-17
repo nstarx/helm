@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "dlnp-ops-fe.fullname" . }}-dlnp-ops-fe
+  labels:
+  {{- include "dlnp-ops-fe.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.dlnpOpsFe.type }}
+  selector:
+    app: dlnp-ops-fe
+    {{- include "dlnp-ops-fe.selectorLabels" . | nindent 4 }}
+  ports:
+  {{- .Values.dlnpOpsFe.ports | toYaml | nindent 2 }}

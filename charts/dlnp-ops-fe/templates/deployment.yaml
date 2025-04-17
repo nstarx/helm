@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "dlnp-ops-fe.fullname" . }}-dlnp-ops-fe
+  labels:
+    app: dlnp-ops-fe
+    version: 1.0.3
+  {{- include "dlnp-ops-fe.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.dlnpOpsFe.replicas }}
+  selector:
+    matchLabels:
+      app: dlnp-ops-fe
+    {{- include "dlnp-ops-fe.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        app: dlnp-ops-fe
+        version: 1.0.3
+      {{- include "dlnp-ops-fe.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - env:
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        image: {{ .Values.dlnpOpsFe.dlnpOpsFe.image.repository }}:{{ .Values.dlnpOpsFe.dlnpOpsFe.image.tag
+          | default .Chart.AppVersion }}
+        name: dlnp-ops-fe
+        ports:
+        - containerPort: 80
+        resources: {}
+      imagePullSecrets:
+      - name: regcred
