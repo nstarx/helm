@@ -1,0 +1,11 @@
+dlnpOpsFe:
+  dlnpOpsFe:
+    image:
+      repository: nstarx.azurecr.io/dlnp-ops-fe
+      tag: 1.0.3
+  ports:
+  - port: 80
+    targetPort: 80
+  replicas: 1
+  type: ClusterIP
+kubernetesClusterDomain: cluster.local
