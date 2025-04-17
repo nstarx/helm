@@ -16,9 +16,9 @@ spec:
     spec:
       containers:
       - name: dlnp-ops-fe
-        image: nstarx.azurecr.io/dlnp-ops-fe:latest
+        image: nstarx.azurecr.io/dlnp-ops-fe:11
         ports:
-        - containerPort: 80
+        - containerPort: 8080
       imagePullSecrets:
       - name: regcred
 
